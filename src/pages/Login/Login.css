@@ -1,0 +1,36 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background:#fff;
+}
+
+.login-content {
+    width: 85%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.submit-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.submit-button{
+    width: 100%;
+    height: 40px;
+    border-radius:25px;
+    border: none;
+    background-color: #BF8D20;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}

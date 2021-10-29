@@ -1,0 +1,8 @@
+.title-container {
+   color: black;
+   font-size: 20 px;
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   font-weight: bold; 
+}
