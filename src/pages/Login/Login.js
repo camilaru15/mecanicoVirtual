@@ -8,32 +8,58 @@ const Login = () => {
 
     const [ user, setUser] = useState('');
     const [ password, setPassword] = useState('');
-    const [ passwordError, setpasswordError] = useState(false);
+    const [ passwordError, setPasswordError] = useState(false);
+    const [ isLogin, setIsLogin ] = useState(false);
+    const [ hasError, setHasError ] = useState(false);
 
     function handleChange(name,value) {
         if(name === 'usuario'){
         setUser(value)
     } else {
         if(value.length < 6){
-            setpasswordError(true);
-        }else {
-            setpasswordError(false);
+            setPasswordError(true);
+        } else {
+            setPasswordError(false);
             setPassword(value)
         }
-    }
+      }
     };
+
+    function ifMatch(param){
+        if(param.user.length > 0 && param.password.length > 0){
+            if(param.user === 'Camila' && param.password === '123456'){
+                const { user,password } = param;
+                let ac = { user,password };
+                let account = JSON.stringify(ac);
+                localStorage.getItem('account', account);
+                setIsLogin(true);
+            } else {
+                setIsLogin(false);
+                setHasError(true);
+            }
+        } else {
+            setIsLogin(false);
+            setHasError(true);
+        }
+    }
 
     function handleSubmit(){
         let account = { user, password}
         if(account){
-            console.log('account:', account)
+            ifMatch(account);
         }
-    }
+    };
 
     return ( 
         <div className="login-container">
+            
             <div className='login-content'>
                 <Title text="Iniciar Sesión"/>
+                {hasError &&
+                <label className ='label-alert'> Su contraseña o usuario son incorrectos
+                    o no existen en nuestra plataforma 
+                </label>
+                }
                 <Label text="Usuario"/>
                 <Input
                 attribute={{
