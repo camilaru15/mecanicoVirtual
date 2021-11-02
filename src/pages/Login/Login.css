@@ -70,3 +70,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.link {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    color: #BF8D20;
+}
+
+.link-registro{
+    color: #BF8D20;
+}

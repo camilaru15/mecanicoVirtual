@@ -2,7 +2,10 @@ import React, {useState } from "react";
 import Label from "./components/Label/labelj"
 import Title from "./components/Title/Title"
 import Input from "./components/Input/Input";
+import Registro from "./components/Register/Register";
 import './Login.css'
+import { BrowserRouter as Router , Switch,Route, Link } from "react-router-dom";
+
 
 const Login = () => {
 
@@ -11,6 +14,7 @@ const Login = () => {
     const [ passwordError, setPasswordError] = useState(false);
     const [ isLogin, setIsLogin ] = useState(false);
     const [ hasError, setHasError ] = useState(false);
+
 
     function handleChange(name,value) {
         if(name === 'usuario'){
@@ -94,15 +98,28 @@ const Login = () => {
                     Contraseña invalida o incompleta 
                 </label>
                 }
+                <Router>
+                  <div className='link'>
+                    <Link to="/register" className="link-registro">
+                      No estoy registrado 
+                    </Link>
+                  </div>
+                  <Switch>
+                    <Route path= '/register'>
+                      <Registro/>
+                    </Route>
+                  </Switch>
+                </Router>
                 <div className='submit-button-container'>
                 <button onClick={handleSubmit} className='submit-button'>
                     Ingresar
                 </button>
                 </div>
             </div>
-            }
+            }          
         </div>
     )
 };
+
 
 export default Login;
