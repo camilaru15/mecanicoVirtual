@@ -15,19 +15,22 @@ const Login = () => {
     function handleChange(name,value) {
         if(name === 'usuario'){
         setUser(value)
+         setHasError(false);
     } else {
         if(value.length < 6){
             setPasswordError(true);
+            setHasError(false);
         } else {
             setPasswordError(false);
             setPassword(value)
+            setHasError(false);
         }
       }
     };
 
     function ifMatch(param){
         if(param.user.length > 0 && param.password.length > 0){
-            if(param.user === 'Camila' && param.password === '123456'){
+            if(param.user && param.password ){
                 const { user,password } = param;
                 let ac = { user,password };
                 let account = JSON.stringify(ac);
@@ -52,7 +55,12 @@ const Login = () => {
 
     return ( 
         <div className="login-container">
-            
+            { isLogin ?
+            <div className='home-container'>
+            <h1> ¡Hola, {user} !</h1>
+            <label> Felicitaciones, estas logueado</label>
+            </div>
+            :
             <div className='login-content'>
                 <Title text="Iniciar Sesión"/>
                 {hasError &&
@@ -92,6 +100,7 @@ const Login = () => {
                 </button>
                 </div>
             </div>
+            }
         </div>
     )
 };

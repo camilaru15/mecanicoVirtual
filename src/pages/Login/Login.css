@@ -63,3 +63,10 @@
     border-radius: 5px;
     margin-bottom: 10px;
 }
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
