@@ -1,22 +1,23 @@
-import React, {useState } from "react";
-import Label from "./components/Label/labelj"
-import Title from "./components/Title/Title"
-import Input from "./components/Input/Input";
-import Registro from "./components/Register/Register"
-import './Login.css'
-import { BrowserRouter as Router , Switch,Route, Link } from "react-router-dom";
+import React, {useState} from 'react';
+import './Register.css';
+import Input from '../Input/Input';
+import Label from '../Label/labelj';
+import Title from '../Title/Title';
 
-
-const Login = () => {
+const Registro = () => {
 
     const [ user, setUser] = useState('');
+    const [ isRegister, setIsRegister ] = useState(false);
     const [ password, setPassword] = useState('');
+    const [email] = useState('');
     const [ passwordError, setPasswordError] = useState(false);
-    const [ isLogin, setIsLogin ] = useState(false);
     const [ hasError, setHasError ] = useState(false);
-
-
-    function handleChange(name,value) {
+    const [country] = useState('');
+    const [direction] = useState('');
+    const [telephone] = useState('');
+    const [mobile] = useState('');
+    
+    function handleChange(name, value) {
         if(name === 'usuario'){
         setUser(value);
          setHasError(false);
@@ -30,43 +31,41 @@ const Login = () => {
             setHasError(false);
         }
       }
-    };
-
-    function ifMatch(param){
+    }
+    
+      function ifMatch(param){
         if(param.user.length > 0 && param.password.length > 0){
             if(param.user && param.password ){
                 const { user,password } = param;
                 let ac = { user,password };
                 let account = JSON.stringify(ac);
                 localStorage.getItem('account', account);
-                setIsLogin(true);
+                setIsRegister(true);
             } else {
-                setIsLogin(false);
+                setIsRegister(false);
                 setHasError(true);
             }
         } else {
-            setIsLogin(false);
+            setIsRegister(false);
             setHasError(true);
         }
     }
-
-    function handleSubmit(){
-        let account = { user, password}
+      function handleSubmitReg(){
+        let account = { user, password, email, country, telephone, mobile, direction}
         if(account){
             ifMatch(account);
         }
     };
-
     return ( 
         <div className="login-container">
-            { isLogin ?
+            { isRegister ?
             <div className='home-container'>
             <h1> ¡Hola, {user} !</h1>
-            <label> Felicitaciones, estas logueado</label>
+            <label> Felicitaciones, te has registrado con exito</label>
             </div>
             :
             <div className='login-content'>
-                <Title text="Iniciar Sesión"/>
+                <Title text="Registro"/>
                 {hasError &&
                 <label className ='label-alert'> Su contraseña o usuario son incorrectos
                     o no existen en nuestra plataforma 
@@ -98,21 +97,8 @@ const Login = () => {
                     Contraseña invalida o incompleta 
                 </label>
                 }
-                
-                <Router>
-                  <div className='link'>
-                    <Link to="/register" className="link-registro">
-                      No estoy registrado 
-                    </Link>
-                  </div>
-                  <Switch>
-                    <Route path= '/register'>
-                      <Registro/>
-                    </Route>
-                  </Switch>
-               </Router> 
                 <div className='submit-button-container'>
-                <button onClick={handleSubmit} className='submit-button'>
+                <button onClick={handleSubmitReg} className='submit-button'>
                     Ingresar
                 </button>
                 </div>
@@ -120,7 +106,7 @@ const Login = () => {
             }          
         </div>
     )
+
 };
 
-
-export default Login;
+export default Registro; 
